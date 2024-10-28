@@ -16,45 +16,52 @@ Accidental commits can be tricky to remove with Git. In this GitHub Skills cours
 </header>
 
 <!--
-  <<< Author notes: Step 1 >>>
-  Choose 3-5 steps for your course.
-  The first step is always the hardest, so pick something easy!
-  Link to docs.github.com for further explanations.
-  Encourage users to open new tabs for steps!
+  <<< Author notes: Step 2 >>>
+  Start this step by acknowledging the previous step.
+  Define terms and link to docs.github.com.
 -->
 
-## Step 1: Removing sensitive data
+## Step 2: Removing a file from Git history using BFG Repo-Cleaner
 
-_Welcome to "Change commit history"! :wave:_
+_You removed `.env` from the repository's root directory! :tada:_
 
-We'll start by working with `.env` files. These files usually contain sensitive content. For this course, we'll work on removing that file and all traces in the Git history. The first step is to remove the file from repository. We'll alter the history later.
+Now that we've deleted the file, people that browse the repository on GitHub.com or anyone looking at just the head commit won't see the file. However, due to Git's nature, the file is still present in the history. In this step, we'll work on removing the file from the repository history.
 
-We'll assume you're using the command line, but you can complete the course using your preferred tooling.
+**What is a _head commit_**? In Git, HEAD points to a branch or a commit. When we say [head commit](https://docs.github.com/en/get-started/quickstart/github-glossary#head), we usually mean the most recent commit in the repository's history.
 
-**What is _sensitive content_?** Sensitive content is anything that is checked into your repository history that may put you or your organization at risk. This content usually comes in the form of credentials (i.e., passwords, access keys). The best practice for accidentally exposed sensitive content is to invalidate it (i.e., revoke a personal access token), completely remove it from all repository copies, and take measures to prevent future exposure.
+There are multiple tools available for removing Git history, we'll use BFG Repo-Cleaner in this step. You can find additional documentation on [Using the BFG in GitHub Docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository#using-the-bfg).
 
-See [Deleting a file on GitHub Docs](https://docs.github.com/en/repositories/working-with-files/managing-files/deleting-files-in-a-repository#deleting-a-file) if you need additional help removing a file.
+**What is _BFG Repo-Cleaner_**? BFG Repo-Cleaner is software that can help you search through and alter repository history. Git can natively do this using [`git filter-repo`](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository#using-git-filter-repo), but it can be more complex.
 
-### :keyboard: Activity: Remove `.env` in the project root directory
+### :keyboard: Activity: Use BFG Repo-Cleaner to remove the `.env` file
 
-1. Open your terminal of choice, clone this repository, and switch to your repository directory.
+1. Update the local copy of your repository to ensure you have the most recent version of the course files.
    ```shell
-   git clone <your-repository-url>
-   cd <your-repository-name>
+   git pull
    ```
-2. Delete `.env` from the root directory.
+2. Install BFG Repo-Cleaner on your machine. You can follow the [instructions on the web site](https://rtyley.github.io/bfg-repo-cleaner/) to do so or you can use a package manager for your operating system.
+3. Confirm the `.env` file is removed from the root directory. The command should return empty.
    ```shell
-   git rm .env
+   find . -name ".env"
    ```
-3. Commit the removal of `.env`.
+4. Search for .env in the repository's history. The command should return at least 2 commits: the addition of `.env` when you copied this template repository, and the removal of `.env`.
    ```shell
-   git commit -m "remove .env file"
+   git log --stat --all -- .env
    ```
-4. Push the removal to GitHub:
+5. Use BFG Repo-Cleaner to delete all references to `.env` that exist in the repository.
    ```shell
-   git push
+   bfg --delete-files .env
    ```
-5. Wait about 20 seconds then refresh this page (the one you're following instructions from). [GitHub Actions](https://docs.github.com/en/actions) will automatically update to the next step.
+6. The tool will run and make some suggestions about some follow-up commands. Run those to get your local repository cleaned up.
+7. Repeat the search for `.env` in the repository's history. This time, the command should return empty.
+   ```shell
+   git log --stat --all -- .env
+   ```
+8. Push your changes to GitHub. Note we're using the `--force` argument in this step since we're altering Git history.
+   ```shell
+   git push --force
+   ```
+9. Wait about 20 seconds then refresh this page (the one you're following instructions from). [GitHub Actions](https://docs.github.com/en/actions) will automatically update to the next step.
 
 <footer>
 
