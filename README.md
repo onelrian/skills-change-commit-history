@@ -16,41 +16,30 @@ Accidental commits can be tricky to remove with Git. In this GitHub Skills cours
 </header>
 
 <!--
-  <<< Author notes: Step 3 >>>
-  Start this step by acknowledging the previous step.
-  Define terms and link to docs.github.com.
+  <<< Author notes: Finish >>>
+  Review what we learned, ask for feedback, provide next steps.
 -->
 
-## Step 3: Avoiding future commits with `.env`
+## Finish
 
-_Nice work removing the file from entire history of the repository! :sparkles:_
+_Congratulations friend, you've completed this course!_
 
-The steps we've taken so far ensure that any _new_ clones of the repository don't contain the sensitive data. But what about collaborators that may already have a copy of the repository? You should ask anyone with a copy of the repository to delete it and clone the repository fresh. In a real-life scenario, you'd also take [additional steps](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository#fully-removing-the-data-from-github) to ensure no sensitive data is cached on GitHub.com.
+<img src="https://octodex.github.com/images/dinotocat.png" alt=celebrate width=300 align=right>
 
-Now that we've mitigated the risk of exposing sensitive content, we'll be proactive and prevent its addition.
+Here's a recap of all the tasks you've accomplished in your repository:
 
-We'll now configure Git so it ignores a future addition of sensitive content by adding `.env` to `.gitignore`. If someone should that file to the local copy of their repository, it will remain only on the contributor's machine and won't be pushed to GitHub.
+- Removed a file from the head commit of the repository
+- Used BFG Repo-Cleaner to removed a file from all Git history in the repository
+- Avoided accidental commits by telling Git to ignore a specific file name
 
-**What is `.gitignore`?** This special file allows us to tell Git naming patterns to ignore. You can read more about it in [Ignoring files on GitHub Docs](https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files).
+### What's next?
 
-### :keyboard: Activity: Add `.env` to `.gitignore`
-
-1. Update the local copy of your repository to ensure you have the most recent version of the course files.
-   ```shell
-   git pull
-   ```
-2. Locate the file we added to the repository titled `.gitignore`.
-3. Add `.env` to the file.
-4. Stage, commit the file:
-   ```shell
-   git add .gitignore
-   git commit -m "ignore .env files"
-   ```
-5. Push the file to GitHub.com
-   ```shell
-   git push
-   ```
-6. Wait about 20 seconds then refresh this page (the one you're following instructions from). [GitHub Actions](https://docs.github.com/en/actions) will automatically update to the next step.
+- The Docs on [Removing sensitive data](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository) are comprehensive and recommended reading after this course.
+- Try your hand at some of the other features listed in the [BFG Repo-Cleaner documentation](https://rtyley.github.io/bfg-repo-cleaner/).
+- [We'd love to hear what you thought of this course](https://github.com/orgs/skills/discussions/categories/change-commit-history).
+- [Take another GitHub Skills course](https://github.com/skills).
+- [Read the GitHub Getting Started docs](https://docs.github.com/en/get-started).
+- To find projects to contribute to, check out [GitHub Explore](https://github.com/explore).
 
 <footer>
 
